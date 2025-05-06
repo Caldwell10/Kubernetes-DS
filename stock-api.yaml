@@ -13,16 +13,16 @@ spec:
         app: stock-api
     spec:
       containers:
-      - name: stock-api
-        image: widgetario/stock-api:21.03
-        ports:
-        - containerPort: 8080
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: stock-db-url
-              key: DATABASE_URL
+        - name: stock-api
+          image: widgetario/stock-api:21.03
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: stock-db-url
+                  key: DATABASE_URL
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +32,7 @@ spec:
   selector:
     app: stock-api
   ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
   type: ClusterIP
