@@ -13,18 +13,18 @@ spec:
         app: web
     spec:
       containers:
-      - name: web
-        image: widgetario/web:21.03
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: web-config-volume
-          mountPath: /app/secrets
-          readOnly: true
+        - name: web
+          image: widgetario/web:21.03
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: web-config-volume
+              mountPath: /app/secrets
+              readOnly: true
       volumes:
-      - name: web-config-volume
-        configMap:
-          name: web-config
+        - name: web-config-volume
+          configMap:
+            name: web-config
 ---
 apiVersion: v1
 kind: Service
@@ -34,8 +34,8 @@ spec:
   selector:
     app: web
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 30007
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30007
   type: NodePort
