@@ -13,23 +13,21 @@ spec:
         app: products-api
     spec:
       containers:
-      - name: products-api
-        image: widgetario/products-api:21.03
-        ports:
-        - containerPort: 8080
-        env:
-        - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://products-db:5432/postgres
-        - name: SPRING_DATASOURCE_USERNAME
-          value: postgres
-        - name: SPRING_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-password
-              key: POSTGRES_PASSWORD
- 
-
-
+        - name: products-api
+          image: widgetario/products-api:21.03
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://products-db:5432/postgres
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: POSTGRES_PASSWORD
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -38,7 +36,7 @@ spec:
   selector:
     app: products-api
   ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
   type: ClusterIP
