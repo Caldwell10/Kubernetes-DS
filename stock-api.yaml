@@ -36,36 +36,3 @@ spec:
     port: 8080
     targetPort: 8080
   type: ClusterIP
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: stock-api
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: stock-api
-  template:
-    metadata:
-      labels:
-        app: stock-api
-    spec:
-      containers:
-      - name: stock-api
-        image: widgetario/stock-api:21.03
-        ports:
-        - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: stock-api
-spec:
-  selector:
-    app: stock-api
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-  type: ClusterIP
-
