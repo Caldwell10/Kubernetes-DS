@@ -37,6 +37,6 @@ spec:
     app: products-api
   ports:
     - protocol: TCP
-      port: 8080       
-      targetPort: 80   
+      port: 8080          
+      targetPort: 80    
   type: ClusterIP
