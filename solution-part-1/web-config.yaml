@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+data:
+  api.json: |
+    {
+      "productsApiUrl": "http://products-api:8080",
+      "stockApiUrl": "http://stock-api:8080"
+    }
+  Widgetario__Theme: "dark"

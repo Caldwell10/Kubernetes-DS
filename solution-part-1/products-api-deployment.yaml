@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: products-api
+  template:
+    metadata:
+      labels:
+        app: products-api
+    spec:
+      containers:
+      - name: products-api
+        image: widgetario/products-api:21.03
+        ports:
+        - containerPort: 80
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://products-db-0.products-db.default.svc.cluster.local:5432/postgres"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "postgres"
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: products-api-secret
+              key: SPRING_DATASOURCE_PASSWORD
