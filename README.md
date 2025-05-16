@@ -174,6 +174,19 @@ kubectl delete namespace widgetario
 
 ## Screenshots
 
+### Light Mode Configuration
+![Light Mode](screenshots/part-1.png)
+
+### Dark Mode Configuration
+![Application Overview](screenshots/part-2.png)
+
+### App Deployment  
+![Kubernetes Deployments](screenshots/local.png)
+
+### API Response  
+![API Response](screenshots/products-api.png)
+
+
 ## CI/CD
 **You can integrate GitHub Actions to auto-deploy changes:**
 
