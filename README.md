@@ -110,6 +110,60 @@ Example:
   value: widgetario123
 ```
 
+## Deploy to Kubernetes
+**Deploy Part 3: Storage & Replication**
+```
+kubectl delete deploy products-db
+kubectl delete svc products-db
+kubectl delete pvc -l app=products-db
+kubectl apply -f hackathon/solution-part-3/products-db \
+               -f hackathon/solution-part-3/products-api \
+               -f hackathon/solution-part-3/stock-api
+kubectl rollout restart deploy/products-api deploy/stock-api
+```
+
+**Deploy Part 4: Ingress**
+```
+kubectl apply -f hackathon/solution-part-4/ingress-controller \
+               -f hackathon/solution-part-4/products-db \
+               -f hackathon/solution-part-4/products-api \
+               -f hackathon/solution-part-4/web
+```
+
+**Update hosts file**
+```
+# Windows
+./scripts/add-to-hosts.ps1 widgetario.local 127.0.0.1
+./scripts/add-to-hosts.ps1 api.widgetario.local 127.0.0.1
+# Linux/macOS
+./scripts/add-to-hosts.sh widgetario.local 127.0.0.1
+./scripts/add-to-hosts.sh api.widgetario.local 127.0.0.1
+```
+
+ **Access the app**
+
+```
+Web App: http://widgetario.local
+Products API: http://api.widgetario.local/products
+```
+
+**Enable observability**
+```
+kubectl apply -f hackathon/solution-part-6/prometheus \
+               -f hackathon/solution-part-6/grafana
+```
+**Load Grafana**
+```
+hackathon/files/grafana-dashboard.json
+```
+
+**Example API Calls**
+```
+curl http://api.widgetario.local/products
+curl http://api.widgetario.local/stocks
+curl http://api.widgetario.local/actuator/prometheus
+```
+
 ## **Cleanup**
 **To delete all resources:**
 
